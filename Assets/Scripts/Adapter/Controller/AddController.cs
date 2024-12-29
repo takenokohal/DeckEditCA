@@ -1,7 +1,7 @@
 ﻿using CommonEntity;
 using Domain.UseCase;
 
-namespace Adapter.Presenter
+namespace Adapter.Controller
 {
     public class AddController
     {

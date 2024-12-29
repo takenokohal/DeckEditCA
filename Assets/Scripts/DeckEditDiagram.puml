@@ -1,46 +1,45 @@
 ﻿@startuml
 
+
+package CommonEntity
+{
+class Card
+{
+}
+}
 package Domain
 {
 package Entity
 {
-class Card
-{
-+ string CardKey
-}
 
 class Deck
 {
-+ void Add(Card card)
-+ void Remove(Card card)
-+ Observable<Card> OnAdd
-+ Observable<Card> OnRemoved
+}
+
+class CardPool
+{
 }
 }
 
 
-}
 
 package UseCase
 {
 class RemoveUseCase
 {
-+ void Remove(UseCaseCardDTO input)
-+ Observable<UseCaseCardDTO> OnRemoved
 }
 
 class AddUseCase
 {
-+ void Add(UseCaseCardDTO input)
-+ Observable<UseCaseCardDTO> OnAdd
 }
 
-class UseCaseCardDTO
+class CardPoolUseCase
 {
-+ string CardKey
 }
-
-
+interface ICardPoolGateway
+{
+}
+}
 }
 
 package Adapter
@@ -50,32 +49,32 @@ package Presenter
 {
 class RemovePresenter
 {
-+ void Initialize()
-+ void Remove(ViewModel viewModel)
 }
 interface IRemoveView
 {
-+ void OnRemoved(ViewModel viewModel)
 }
 
 class AddPresenter
 {
-+ void Initialize()
-+ void Add(ViewModel viewModel)
 }
 
 interface IAddView
+
+class CardPoolPresenter
+interface ICardPoolView
+}
+
+package Controller
 {
-+ void OnAdd(ViewModel viewModel)
+class AddController
+class RemoveController
 }
 
-class CardViewModel
+package Gateway
 {
-+ string CardKey
+class CardPoolGateway
+interface ICardDatabase
 }
-
-}
-
 }
 
 package Detail
@@ -94,9 +93,18 @@ class DeckCardView
 
 class DeckCardViewFactory
 {
-+ DeckCardView Create(ViewModel viewModel)
 }
 
+class CardPoolView
+class CardPoolCardView
+class CardPoolCardFactory
+
+}
+
+package DB
+{
+class CardPoolDatabase
+class CardData
 }
 
 }
@@ -112,14 +120,30 @@ RemoveUseCase -u--> Deck
 
 RemovePresenter -u-> RemoveUseCase
 RemovePresenter --> IRemoveView
-RemovePresenter -r-> CardViewModel
-RemovePresenter -u-> UseCaseCardDTO
 
 DeckView -u-|> IRemoveView
 
-DeckView -r-> DeckCardViewFactory
-DeckCardViewFactory -r-> DeckCardView
-DeckCardView -u--> RemovePresenter
-DeckCardView -u-> CardViewModel
+DeckView -d-> DeckCardViewFactory
+DeckCardViewFactory -d-> DeckCardView
+DeckCardView -u--> RemoveController
+
+CardPoolUseCase -u-> CardPool
+
+CardPoolView -d-> CardPoolCardFactory
+CardPoolPresenter -u-> CardPoolUseCase
+CardPoolPresenter --> ICardPoolView
+CardPoolView -u-|> ICardPoolView
+CardPoolCardFactory -d-> CardPoolCardView
+CardPoolCardView -u-> AddController
+
+AddController -u-> AddUseCase
+RemoveController -u-> RemoveUseCase
+
+CardPoolUseCase --> ICardPoolGateway
+CardPoolGateway -u-|> ICardPoolGateway
+CardPoolGateway --> ICardDatabase
+
+CardPoolDatabase -u-|> ICardDatabase
+CardPoolDatabase --> CardData
 
 @enduml

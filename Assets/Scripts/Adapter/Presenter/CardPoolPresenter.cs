@@ -6,18 +6,18 @@ namespace Adapter.Presenter
 {
     public class CardPoolPresenter : IInitializable
     {
-        private readonly ResetCardPoolUseCase _resetCardPoolUseCase;
+        private readonly CardPoolUseCase _cardPoolUseCase;
         private readonly ICardPoolView _cardPoolView;
 
-        public CardPoolPresenter(ResetCardPoolUseCase resetCardPoolUseCase, ICardPoolView cardPoolView)
+        public CardPoolPresenter(CardPoolUseCase cardPoolUseCase, ICardPoolView cardPoolView)
         {
-            _resetCardPoolUseCase = resetCardPoolUseCase;
+            _cardPoolUseCase = cardPoolUseCase;
             _cardPoolView = cardPoolView;
         }
 
         public void Initialize()
         {
-            _resetCardPoolUseCase.ObserveReset().Subscribe(value => _cardPoolView.OnReset(value));
+            _cardPoolUseCase.ObserveReset().Subscribe(value => _cardPoolView.OnReset(value));
         }
     }
 }

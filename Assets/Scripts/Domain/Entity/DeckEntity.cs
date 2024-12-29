@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using CommonEntity;
 using ObservableCollections;
 using R3;
@@ -23,17 +22,6 @@ namespace Domain.Entity
         public void Remove(CardEntity cardEntity)
         {
             _cardEntities.Remove(cardEntity);
-        }
-
-        private readonly Subject<IEnumerable<CardEntity>> _onReset = new();
-
-        public Observable<IEnumerable<CardEntity>> OnReset => _onReset;
-
-        public void Reset(IEnumerable<CardEntity> deck)
-        {
-            _cardEntities.Clear();
-            _cardEntities.AddRange(deck);
-            _onReset.OnNext(_cardEntities);
         }
 
         private readonly ReactiveProperty<CardEntity> _currentFocusedCard = new();

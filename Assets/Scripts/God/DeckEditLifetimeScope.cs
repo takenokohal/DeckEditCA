@@ -1,4 +1,5 @@
-﻿using Adapter.Gateway;
+﻿using Adapter.Controller;
+using Adapter.Gateway;
 using Adapter.Presenter;
 using Detail.DB;
 using Detail.View;
@@ -24,7 +25,7 @@ namespace God
             //UseCase
             builder.Register<AddUseCase>(Lifetime.Singleton);
             builder.Register<RemoveUseCase>(Lifetime.Singleton);
-            builder.Register<ResetCardPoolUseCase>(Lifetime.Singleton);
+            builder.Register<CardPoolUseCase>(Lifetime.Singleton);
 
             //Presenter
             builder.RegisterEntryPoint<AddPresenter>();

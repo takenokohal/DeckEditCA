@@ -5,15 +5,15 @@ namespace God
 {
     public class GameInitializer : IInitializable
     {
-        private readonly ResetCardPoolUseCase _resetCardPoolUseCase;
+        private readonly CardPoolUseCase _cardPoolUseCase;
 
-        public GameInitializer(ResetCardPoolUseCase resetCardPoolUseCase)
+        public GameInitializer(CardPoolUseCase cardPoolUseCase)
         {
-            _resetCardPoolUseCase = resetCardPoolUseCase;
+            _cardPoolUseCase = cardPoolUseCase;
         }
         public void Initialize()
         {
-            _resetCardPoolUseCase.Reset();
+            _cardPoolUseCase.Reset();
         }
     }
 }

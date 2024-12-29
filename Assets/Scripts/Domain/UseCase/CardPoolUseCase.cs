@@ -5,12 +5,12 @@ using R3;
 
 namespace Domain.UseCase
 {
-    public class ResetCardPoolUseCase
+    public class CardPoolUseCase
     {
         private readonly CardPoolEntity _cardPoolEntity;
         private readonly ICardPoolGateway _cardPoolGateway;
 
-        public ResetCardPoolUseCase(CardPoolEntity cardPoolEntity, ICardPoolGateway cardPoolGateway)
+        public CardPoolUseCase(CardPoolEntity cardPoolEntity, ICardPoolGateway cardPoolGateway)
         {
             _cardPoolEntity = cardPoolEntity;
             _cardPoolGateway = cardPoolGateway;
