@@ -1,0 +1,17 @@
+{
+    "name": "Gateway",
+    "rootNamespace": "",
+    "references": [
+        "GUID:440ab10d50e5efa4b9043738360b9f48",
+        "GUID:ac2162ae47297f841b0214744ffa122a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

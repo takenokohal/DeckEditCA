@@ -1,0 +1,17 @@
+{
+    "name": "DB",
+    "rootNamespace": "",
+    "references": [
+        "GUID:34c84261d5de43cbab9a0f2e99b459ad",
+        "GUID:ac2162ae47297f841b0214744ffa122a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

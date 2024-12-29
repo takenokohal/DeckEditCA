@@ -1,0 +1,125 @@
+﻿@startuml
+
+package Domain
+{
+package Entity
+{
+class Card
+{
++ string CardKey
+}
+
+class Deck
+{
++ void Add(Card card)
++ void Remove(Card card)
++ Observable<Card> OnAdd
++ Observable<Card> OnRemoved
+}
+}
+
+
+}
+
+package UseCase
+{
+class RemoveUseCase
+{
++ void Remove(UseCaseCardDTO input)
++ Observable<UseCaseCardDTO> OnRemoved
+}
+
+class AddUseCase
+{
++ void Add(UseCaseCardDTO input)
++ Observable<UseCaseCardDTO> OnAdd
+}
+
+class UseCaseCardDTO
+{
++ string CardKey
+}
+
+
+}
+
+package Adapter
+{
+
+package Presenter
+{
+class RemovePresenter
+{
++ void Initialize()
++ void Remove(ViewModel viewModel)
+}
+interface IRemoveView
+{
++ void OnRemoved(ViewModel viewModel)
+}
+
+class AddPresenter
+{
++ void Initialize()
++ void Add(ViewModel viewModel)
+}
+
+interface IAddView
+{
++ void OnAdd(ViewModel viewModel)
+}
+
+class CardViewModel
+{
++ string CardKey
+}
+
+}
+
+}
+
+package Detail
+{
+
+
+package View
+{
+class DeckView
+{
+}
+
+class DeckCardView
+{
+}
+
+class DeckCardViewFactory
+{
++ DeckCardView Create(ViewModel viewModel)
+}
+
+}
+
+}
+
+AddUseCase -u-> Deck
+
+AddPresenter -u--> AddUseCase
+AddPresenter --> IAddView
+
+DeckView -u-|> IAddView
+
+RemoveUseCase -u--> Deck
+
+RemovePresenter -u-> RemoveUseCase
+RemovePresenter --> IRemoveView
+RemovePresenter -r-> CardViewModel
+RemovePresenter -u-> UseCaseCardDTO
+
+DeckView -u-|> IRemoveView
+
+DeckView -r-> DeckCardViewFactory
+DeckCardViewFactory -r-> DeckCardView
+DeckCardView -u--> RemovePresenter
+DeckCardView -u-> CardViewModel
+
+@enduml
